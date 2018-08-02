@@ -9,19 +9,20 @@ from .factories import PublisherFactory
 
 class PublisherViewTestCase(APITestCase):
     def setUp(self):
-        self.url = reverse('publishers')
         self.publisher = PublisherFactory(name='dev', website='dev.com')
         self.publisher.save()
 
     def test_request_all_publishers(self):
-        response = self.client.get(self.url, format='json')
+        url = reverse('publishers-all')
+        response = self.client.get(url, format='json')
         publishers = Publisher.objects.all()
         serialize = PublisherSerializer(publishers, many=True)
         self.assertEquals(status.HTTP_200_OK, response.status_code)
         self.assertEquals(serialize.data, response.data['results'])
 
-    def test_filter_request(self):
-        filter_url = self.url + '?name=dev'
+    def test_filter_by_status(self):
+        url = reverse('publishers-filtered')
+        filter_url = url + '?status=unknown'
         response = self.client.get(filter_url, format='json')
         publishers = Publisher.objects.all()
         serialize = PublisherSerializer(publishers, many=True)
@@ -29,9 +30,19 @@ class PublisherViewTestCase(APITestCase):
         self.assertEquals(serialize.data, response.data['results'])
 
     def test_search_request(self):
-        filter_url = self.url + '?search=dev'
+        url = reverse('publishers-filtered')
+        filter_url = url + '?search=dev'
         response = self.client.get(filter_url, format='json')
         publishers = Publisher.objects.all()
         serialize = PublisherSerializer(publishers, many=True)
         self.assertEquals(status.HTTP_200_OK, response.status_code)
         self.assertEquals(serialize.data, response.data['results'])
+
+    def test_get_publisher_by_name(self):
+        url = reverse('publisher-name', args=['dev'])
+        response = self.client.get(url, format='json')
+        publisher = Publisher.objects.all()
+        serialize = PublisherSerializer(publisher[0])
+        self.assertEquals(status.HTTP_200_OK, response.status_code)
+        self.assertEquals(serialize.data, response.data)
+
