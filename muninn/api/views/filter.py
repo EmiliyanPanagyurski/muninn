@@ -5,7 +5,6 @@ class CaseInsensitiveFilter(DjangoFilterBackend):
     """ Filter that allows url params to be case insensitive """
 
     def filter_queryset(self, request, queryset, view):
-        # import pdb; pdb.set_trace()
         param = request.query_params.get('status', None)
         if param is not None:
             data = queryset.filter(status__iexact=param)

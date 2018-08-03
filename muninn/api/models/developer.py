@@ -3,6 +3,7 @@ from .entities import Entities
 
 
 class Developer(Entities):
+    """ Model that represents a developer """
     industry = models.CharField(max_length=30)
     number_employees = models.IntegerField()
     founder = models.CharField(max_length=30)

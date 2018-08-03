@@ -3,6 +3,7 @@ from .entities import Entities
 
 
 class Publisher(Entities):
+    """ Model representing a pubisher """
     revenue = models.CharField(max_length=30)
 
     class Meta:

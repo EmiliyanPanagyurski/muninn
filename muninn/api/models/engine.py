@@ -3,6 +3,7 @@ from .developer import Developer
 
 
 class Engine(models.Model):
+    """ Model that represents a game engine """
     name = models.CharField(max_length=30)
     developer = models.ForeignKey(Developer,
                                   on_delete=models.SET_NULL,
