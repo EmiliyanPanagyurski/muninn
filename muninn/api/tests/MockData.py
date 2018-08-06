@@ -7,7 +7,7 @@ TESTDATA = {
         'release_date': '2018-07-30',
         'initial_release': 'test',
         'stable_release': 'test stable',
-        'status': 'Unkown',
+        'status': 'Unknown',
         'industry': 'test',
         'products': 'test',
         'number_employees': 100,

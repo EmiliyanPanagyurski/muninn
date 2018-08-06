@@ -1,7 +1,9 @@
 import factory
-from ..models.developer import Developer
-from ..models.publisher import Publisher
-from ..models.engine import Engine
+
+from api.models.game import Game
+from api.models.developer import Developer
+from api.models.publisher import Publisher
+from api.models.engine import Engine
 from .MockData import TESTDATA
 
 
@@ -41,3 +43,18 @@ class EngineFactory(factory.django.DjangoModelFactory):
     developer = factory.SubFactory(DeveloperFactory)
     initial_release = TESTDATA['initial_release']
     stable_release = TESTDATA['stable_release']
+
+
+class GameFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Game
+
+    name = TESTDATA['name']
+    genre = TESTDATA['genre']
+    description = TESTDATA['description']
+    developer = factory.SubFactory(DeveloperFactory)
+    publisher = factory.SubFactory(PublisherFactory)
+    platforms = TESTDATA['platforms']
+    engine = factory.SubFactory(EngineFactory)
+    series = TESTDATA['series']
+    release_date = TESTDATA['release_date']

@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Entities(models.Model):
+    """ Base abstract class the keeps shared model data """
     ACTIVE = 'active'
     DEFUNCT = 'defunct'
     UNKNOWN = 'unknown'

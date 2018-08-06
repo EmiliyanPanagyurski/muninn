@@ -5,6 +5,7 @@ from .engine import Engine
 
 
 class Game(models.Model):
+    """ Model representing a game """
     name = models.CharField(max_length=30)
     genre = models.TextField()
     description = models.TextField()
